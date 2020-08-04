@@ -1,0 +1,1 @@
+pyside2-uic weather_window.ui -o weather_ui.py
