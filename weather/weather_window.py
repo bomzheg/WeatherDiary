@@ -1,12 +1,13 @@
 import datetime
-from functools import partial
 from pathlib import Path
 
 from sqlite3 import Connection
+from tempfile import TemporaryFile
+
 from PySide2 import QtWidgets, QtGui, QtCore
 from weather.weather_ui import Ui_Dialog
-from weather.models.all_day import AllDay
-from weather.utils import load_all_csv
+from weather.models import AllDay, get_last_day
+from weather.utils import parse_all_csv, load_file, parse_one_csv
 
 
 class MyWindow(QtWidgets.QMainWindow):
@@ -28,7 +29,8 @@ class MyWindow(QtWidgets.QMainWindow):
 
         self.csv_path = csv_path
         self.ui.csv_path.setText(str(csv_path))
-        self.ui.load_csv.clicked.connect(self.load_csv)
+        self.ui.load_csv.clicked.connect(self.load_csv_files)
+        self.ui.load_weather.clicked.connect(self.load_csv_from_web)
 
     def date_changed(self):
         date_from_window = datetime.date(
@@ -46,10 +48,22 @@ class MyWindow(QtWidgets.QMainWindow):
             event.size().height(),
         ))
 
-    def load_csv(self):
+    def load_csv_files(self):
         cursor = self.conn.cursor()
-        load_all_csv(cursor, self.csv_path)
+        parse_all_csv(cursor, self.csv_path)
         self.conn.commit()
         cursor.close()
 
+    def load_csv_from_web(self):
+        date_from = get_last_day(self.conn)
+        date_from -= datetime.timedelta(days=1)
+        date_to = datetime.datetime.now().date()
+        with TemporaryFile(mode='r+', encoding="utf-8") as csv_file:
+            load_file(date_from, date_to, csv_file)
+            csv_file.seek(0)
 
+            cur = self.conn.cursor()
+            parse_one_csv(cur, csv_file)
+            self.conn.commit()
+            cur.close()
+        self.date_changed()

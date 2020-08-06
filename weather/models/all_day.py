@@ -50,7 +50,7 @@ class AllDay(QAbstractTableModel):
         cur = self.conn.cursor()
         cur.execute(SQL_ALL_DAY, (self.current_date,))
         self.beginResetModel()
-        # self.headers = [column.name for column in cur.description]
+        # self.HEADRERS = [column.name for column in cur.description]
         self._array_data = [
             ["---"] for _ in range(24 * COUNT_IN_HOUR)
         ]

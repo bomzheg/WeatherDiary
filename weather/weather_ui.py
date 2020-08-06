@@ -31,7 +31,7 @@ class Ui_Dialog(object):
         self.all_day.setGeometry(QRect(0, 0, 180, 570))
         self.load_csv = QPushButton(Dialog)
         self.load_csv.setObjectName(u"load_csv")
-        self.load_csv.setGeometry(QRect(190, 240, 131, 23))
+        self.load_csv.setGeometry(QRect(190, 240, 161, 23))
         self.csv_path_header = QLabel(Dialog)
         self.csv_path_header.setObjectName(u"csv_path_header")
         self.csv_path_header.setGeometry(QRect(190, 190, 301, 16))
@@ -39,6 +39,9 @@ class Ui_Dialog(object):
         self.csv_path.setObjectName(u"csv_path")
         self.csv_path.setGeometry(QRect(190, 210, 301, 20))
         self.csv_path.setReadOnly(True)
+        self.load_weather = QPushButton(Dialog)
+        self.load_weather.setObjectName(u"load_weather")
+        self.load_weather.setGeometry(QRect(190, 270, 161, 21))
 
         self.retranslateUi(Dialog)
 
@@ -47,7 +50,8 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
-        self.load_csv.setText(QCoreApplication.translate("Dialog", u"\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c .csv", None))
+        self.load_csv.setText(QCoreApplication.translate("Dialog", u"\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0438\u0437 \u0444\u0430\u0439\u043b\u0430 .csv", None))
         self.csv_path_header.setText(QCoreApplication.translate("Dialog", u"\u041f\u0443\u0442\u044c \u0434\u043e \u0444\u0430\u0439\u043b\u043e\u0432 .csv :", None))
+        self.load_weather.setText(QCoreApplication.translate("Dialog", u"\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0438\u0437 web", None))
     # retranslateUi
 

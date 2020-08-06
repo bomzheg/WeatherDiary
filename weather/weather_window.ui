@@ -51,12 +51,12 @@
     <rect>
      <x>190</x>
      <y>240</y>
-     <width>131</width>
+     <width>161</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Загрузить .csv</string>
+    <string>Загрузить из файла .csv</string>
    </property>
   </widget>
   <widget class="QLabel" name="csv_path_header">
@@ -83,6 +83,29 @@
    </property>
    <property name="readOnly">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="load_weather">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>270</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Загрузить из web</string>
+   </property>
+  </widget>
+  <widget class="QListView" name="log_list">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>300</y>
+     <width>311</width>
+     <height>271</height>
+    </rect>
    </property>
   </widget>
  </widget>
