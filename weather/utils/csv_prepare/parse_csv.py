@@ -40,7 +40,11 @@ def parse_one_csv(cursor: Cursor, in_file: typing.Union[io.IO[str], io.TextIO]):
         this_time = datetime.datetime.strptime(this_time, "%H:%M").time()
         minuts = to_int(this_time)
 
-        args.append(make_args_for_request(this_date, minuts, int(float(line[TEMP_HEADER]))))
+        try:
+            args.append(make_args_for_request(this_date, minuts, int(float(line[TEMP_HEADER]))))
+        except ValueError:
+            logger.error("can't pass this line {line}. probably {temp} is not a number",
+                         line=line, temp=line[TEMP_HEADER])
     cursor.executemany(SQL_INSERT, args)
     logger.info("updated to DB {n_lines} lines.", n_lines=n_lines)
 
